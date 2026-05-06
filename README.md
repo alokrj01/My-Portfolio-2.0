@@ -5,14 +5,14 @@
 </h3>
 
 <p align="center">
-  <a href="https://alokranjanportfolio.vercel.app" target="_blank"><strong>🌐 Live Demo</strong></a>
+  <a href="https://alok-dev-portfolio.netlify.app/" target="_blank"><strong>🌐 Live Demo</strong></a>
 </p>
 
 ---
 
 ## 📸 Preview
 
-![Portfolio Screenshot](https://github.com/alokrj01/My-Portfolio-2.0/blob/main/src/assets/Screenshot%202026-01-12%20104159.png)
+![Portfolio Screenshot](https://github.com/alokrj01/My-Portfolio-2.0/blob/main/src/assets/Screenshot%20from%202026-05-06%2011-08-34.png)
 
 ---
 
