@@ -54,7 +54,6 @@ import cvxpertLogo from './assets/work_logo/CVXpert.png';
 // import imagesearchLogo from './assets/work_logo/image_search.png';
 // import removebgLogo from './assets/work_logo/remove_bg.png';
 
-
 export const SkillsInfo = [
   {
     title: 'Frontend',
@@ -305,23 +304,26 @@ export const SkillsInfo = [
 
 
 // Certifications
+import nielit from "./assets/certificate_img/NIELIT.jpg";
+import react from "./assets/certificate_img/React.jpg";
+
 export const certifications = [
   {
     id: 1,
-    title: "Full Stack Web Development",
-    issuer: "Udemy",
-    date: "2025",
-    image: "/certificates/fullstack.png",
-    link: "https://your-certificate-link.com",
-    tags: ["MERN", "React", "Node.js"],
+    title: "Machine Learning using Python",
+    issuer: "NIELIT, Haridwar",
+    date: "2023",
+    image: nielit,
+    link: "https://drive.google.com/file/d/1cv9Ce7qgByLJVkScd1_bgR2kRM92GRdG/view?usp=drive_link",
+    tags: ["Python", "Machine Learning"],
   },
   {
     id: 2,
-    title: "Data Analytics Certification",
-    issuer: "Coursera",
-    date: "2024",
-    image: "/certificates/data.png",
-    link: "https://your-certificate-link.com",
-    tags: ["Python", "Pandas", "SQL"],
+    title: "React.js",
+    issuer: "Internshala",
+    date: "2023",
+    image: react,
+    link: "https://drive.google.com/file/d/1XczoyiPZt4eRS90a0--pXJf7qIQPLaUk/view?usp=drive_link",
+    tags: ["React.js"],
   },
 ];

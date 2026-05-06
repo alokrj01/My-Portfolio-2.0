@@ -155,7 +155,7 @@ Contributions are welcome!
 
 ## 📬 Contact
 
-* 📧 Email: [your-email@example.com](mailto:your-email@example.com)
+* 📧 Email: [ranjanalok2468@gmail.com](ranjanalok2468@gmail.com)
 * 💼 LinkedIn: https://www.linkedin.com/in/alok-ranjan972
 * 🧑‍💻 GitHub: https://github.com/alokrj01
 
