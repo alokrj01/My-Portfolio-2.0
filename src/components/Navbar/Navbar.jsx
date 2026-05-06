@@ -36,7 +36,9 @@ const Navbar = () => {
   // Lock body scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
   const handleMenuItemClick = (id) => {
@@ -89,24 +91,50 @@ const Navbar = () => {
 
           {/* Desktop Social Icons */}
           <div className="hidden md:flex space-x-4">
-            <a href="https://github.com/alokrj01" target="_blank" rel="noopener noreferrer"
-              className="text-gray-300 hover:text-purple-400 transition">
+            <a
+              href="https://github.com/alokrj01"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-purple-400 transition"
+            >
               <FaGithub size={22} />
             </a>
-            <a href="https://www.linkedin.com/in/alok-ranjan972" target="_blank" rel="noopener noreferrer"
-              className="text-gray-300 hover:text-purple-400 transition">
+            <a
+              href="https://www.linkedin.com/in/alok-ranjan972"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-purple-400 transition"
+            >
               <FaLinkedin size={22} />
             </a>
           </div>
 
-          {/* Hamburger — mobile only */}
-          <button
-            className="md:hidden text-2xl text-purple-400"
-            onClick={() => setIsOpen(true)}
-            aria-label="Open menu"
-          >
-            <FiMenu />
-          </button>
+          {/* Mobile social icon */}
+          <div className="md:hidden flex items-center gap-3">
+            <a
+              href="https://github.com/alokrj01"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-purple-400 transition"
+            >
+              <FaGithub size={20} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/alok-ranjan972"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-purple-400 transition"
+            >
+              <FaLinkedin size={20} />
+            </a>
+            <button
+              className="text-2xl text-purple-400"
+              onClick={() => setIsOpen(true)}
+              aria-label="Open menu"
+            >
+              <FiMenu />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -114,7 +142,7 @@ const Navbar = () => {
       {isOpen && (
         <div
           className="md:hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center"
-          onClick={() => setIsOpen(false)}   // tap backdrop to close
+          onClick={() => setIsOpen(false)} // tap backdrop to close
         >
           {/* Card — stopPropagation so tapping inside doesn't close */}
           <div
@@ -136,25 +164,15 @@ const Navbar = () => {
                   <button
                     onClick={() => handleMenuItemClick(item.id)}
                     className={`text-lg font-medium transition duration-300 hover:text-purple-400 hover:scale-105 ${
-                      activeSection === item.id ? "text-purple-400" : "text-gray-300"
+                      activeSection === item.id
+                        ? "text-purple-400"
+                        : "text-gray-300"
                     }`}
                   >
                     {item.label}
                   </button>
                 </li>
               ))}
-
-              {/* Socials */}
-              <div className="flex gap-6 mt-2">
-                <a href="https://github.com/alokrj01" target="_blank" rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-purple-400 transition duration-300 hover:scale-110">
-                  <FaGithub size={24} />
-                </a>
-                <a href="https://www.linkedin.com/in/alok-ranjan972" target="_blank" rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-purple-400 transition duration-300 hover:scale-110">
-                  <FaLinkedin size={24} />
-                </a>
-              </div>
             </ul>
           </div>
         </div>
