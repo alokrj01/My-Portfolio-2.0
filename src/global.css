@@ -1,27 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-
 @import "tailwindcss";
 
+/* Theme (Tailwind v4) */
 @theme {
-  /* Keyframes */
-  --animate-blob: blob 10s infinite;
+  --animate-blob: blob 10s infinite ease-in-out;
 
   @keyframes blob {
-    0% {
-      transform: scale(1);
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
     }
     33% {
-      transform: scale(1.2);
+      transform: translate(30px, -40px) scale(1.1);
     }
     66% {
-      transform: scale(0.8);
-    }
-    100% {
-      transform: scale(1);
+      transform: translate(-20px, 20px) scale(0.9);
     }
   }
 
-  /* Background image */
   --background-image-skills-gradient: 
     linear-gradient(
       38.73deg,
@@ -35,23 +30,77 @@
     );
 }
 
+/* Utilities */
 @layer utilities {
-    .clip-path-custom {
-      clip-path: polygon(0 0, 100% 0, 100% 98%, 75% 95%, 0 100%);
-    }
-    .clip-path-custom-2 {
-        clip-path: polygon(0 0, 100% 0, 100% 98%, 25% 95%, 0 100%);
-      }
-    .clip-path-custom-3 {
-        clip-path: polygon(0 0, 100% 0, 100% 98%, 75% 96%, 0 100%);
-      }
+  .clip-path-custom {
+    clip-path: polygon(0 0, 100% 0, 100% 98%, 75% 95%, 0 100%);
   }
-  
+
+  .clip-path-custom-2 {
+    clip-path: polygon(0 0, 100% 0, 100% 98%, 25% 95%, 0 100%);
+  }
+
+  .clip-path-custom-3 {
+    clip-path: polygon(0 0, 100% 0, 100% 98%, 75% 96%, 0 100%);
+  }
+}
+
+/* Global Base */
 * {
-    font-family: "Outfit", sans-serif;
+  font-family: "Outfit", sans-serif;
+  box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Prevent layout bugs */
+body {
+  overflow-x: hidden;
 }
 
+/* Better text selection */
+::selection {
+  background: #8245ec;
+  color: white;
+}
+
+/* Scrollbar (modern minimal) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(130, 69, 236, 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(130, 69, 236, 0.8);
+}
+
+/* Autofill fix (important for contact form) */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #131025 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Disable image drag (clean UX) */
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Optional: smooth fade utility */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

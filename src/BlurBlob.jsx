@@ -1,31 +1,34 @@
-// components/BlurBlob.jsx
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { memo } from "react";
+import PropTypes from "prop-types";
 
-const BlurBlob = ({ position, size }) => {
-  // Destructure position and size with default values
-  const { top, left } = position
-  const { width, height } = size 
-
+const BlurBlob = ({
+  position = { top: "50%", left: "50%" },
+  size = { width: "300px", height: "300px" },
+  color = "bg-purple-500",
+  opacity = "opacity-20",
+  blur = "blur-3xl",
+  animation = "animate-blob",
+  zIndex = "z-0",
+}) => {
   return (
     <div
-      className="absolute"
+      className={`absolute ${zIndex} pointer-events-none`}
       style={{
-        top: top,
-        left: left,
-        width: width,
-        height: height,
-        transform: 'translate(-50%, -50%)',
+        top: position.top,
+        left: position.left,
+        width: size.width,
+        height: size.height,
+        transform: "translate(-50%, -50%)",
       }}
     >
       <div
-        className="w-full h-full bg-purple-500 rounded-full opacity-20 blur-3xl animate-blob"
-      ></div>
+        className={`w-full h-full rounded-full ${color} ${opacity} ${blur} ${animation}`}
+      />
     </div>
   );
 };
 
-// Define prop types
+// Prop validation
 BlurBlob.propTypes = {
   position: PropTypes.shape({
     top: PropTypes.string,
@@ -35,6 +38,11 @@ BlurBlob.propTypes = {
     width: PropTypes.string,
     height: PropTypes.string,
   }),
+  color: PropTypes.string,
+  opacity: PropTypes.string,
+  blur: PropTypes.string,
+  animation: PropTypes.string,
+  zIndex: PropTypes.string,
 };
 
-export default BlurBlob;
+export default memo(BlurBlob);

@@ -302,3 +302,26 @@ export const SkillsInfo = [
     //   webapp: "https://removeyourbg.netlify.app/",
     // },
   ];  
+
+
+// Certifications
+export const certifications = [
+  {
+    id: 1,
+    title: "Full Stack Web Development",
+    issuer: "Udemy",
+    date: "2025",
+    image: "/certificates/fullstack.png",
+    link: "https://your-certificate-link.com",
+    tags: ["MERN", "React", "Node.js"],
+  },
+  {
+    id: 2,
+    title: "Data Analytics Certification",
+    issuer: "Coursera",
+    date: "2024",
+    image: "/certificates/data.png",
+    link: "https://your-certificate-link.com",
+    tags: ["Python", "Pandas", "SQL"],
+  },
+];

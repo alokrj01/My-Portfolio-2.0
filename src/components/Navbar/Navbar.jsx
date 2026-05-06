@@ -7,62 +7,82 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Detect scroll and change navbar background
+  const menuItems = [
+    { id: "about", label: "About" },
+    { id: "skills", label: "Skills" },
+    { id: "experience", label: "Experience" },
+    { id: "projects", label: "Projects" },
+    { id: "education", label: "Education" },
+    { id: "certifications", label: "certifications"},
+  ];
+
+  // Scroll detection (navbar bg + active section)
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      let current = "";
+      menuItems.forEach((item) => {
+        const section = document.getElementById(item.id);
+        if (section) {
+          const top = section.offsetTop - 100;
+          if (window.scrollY >= top) {
+            current = item.id;
+          }
+        }
+      });
+
+      setActiveSection(current);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll function
-  const handleMenuItemClick = (sectionId) => {
-    setActiveSection(sectionId);
+  // Smooth scroll with offset
+  const handleMenuItemClick = (id) => {
     setIsOpen(false);
 
-    const section = document.getElementById(sectionId);
+    const section = document.getElementById(id);
     if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+      const y = section.offsetTop - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
-  const menuItems = [
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "experience", label: "Experience" },
-    { id: "work", label: "Projects" },
-    { id: "education", label: "Education" },
-  ];
-
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${
-        isScrolled ? "bg-[#050414] bg-opacity-50 backdrop-blur-md shadow-md" : "bg-transparent"
+      className={`fixed top-0 w-full z-50 transition-all duration-300 px-5 sm:px-[7vw] lg:px-[20vw] ${
+        isScrolled
+          ? "bg-[#050414]/70 backdrop-blur-md shadow-md"
+          : "bg-transparent"
       }`}
     >
-      <div className="text-white py-5 flex justify-between items-center">
+      <div className="text-white py-4 flex justify-between items-center">
+        
         {/* Logo */}
-        <div className="text-lg font-semibold cursor-pointer">
-          <span className="text-[#8245ec]">&lt;</span>
-          <span className="text-white">Alok</span>
-          <span className="text-[#8245ec]">/</span>
-          <span className="text-white">Ranjan</span>
-          <span className="text-[#8245ec]">&gt;</span>
+        <div className="text-lg font-semibold cursor-pointer select-none">
+          <span className="text-purple-500">&lt;</span>
+          <span>Alok</span>
+          <span className="text-purple-500">/</span>
+          <span>Ranjan</span>
+          <span className="text-purple-500">&gt;</span>
         </div>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-8 text-gray-300">
           {menuItems.map((item) => (
-            <li
-              key={item.id}
-              className={`cursor-pointer hover:text-[#8245ec] ${
-                activeSection === item.id ? "text-[#8245ec]" : ""
-              }`}
-            >
-              <button onClick={() => handleMenuItemClick(item.id)}>
+            <li key={item.id}>
+              <button
+                onClick={() => handleMenuItemClick(item.id)}
+                className={`relative hover:text-purple-400 transition ${
+                  activeSection === item.id ? "text-purple-400" : ""
+                }`}
+              >
                 {item.label}
+                {activeSection === item.id && (
+                  <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-purple-500"></span>
+                )}
               </button>
             </li>
           ))}
@@ -74,71 +94,70 @@ const Navbar = () => {
             href="https://github.com/alokrj01"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
+            className="text-gray-300 hover:text-purple-400 transition"
           >
-            <FaGithub size={24} />
+            <FaGithub size={22} />
           </a>
           <a
             href="https://www.linkedin.com/in/alok-ranjan972"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
+            className="text-gray-300 hover:text-purple-400 transition"
           >
-            <FaLinkedin size={24} />
+            <FaLinkedin size={22} />
           </a>
         </div>
 
-        {/* Mobile Menu Icon */}
-        <div className="md:hidden">
-          {isOpen ? (
-            <FiX
-              className="text-3xl text-[#8245ec] cursor-pointer"
-              onClick={() => setIsOpen(false)}
-            />
-          ) : (
-            <FiMenu
-              className="text-3xl text-[#8245ec] cursor-pointer"
-              onClick={() => setIsOpen(true)}
-            />
-          )}
-        </div>
+        {/* Mobile Icon */}
+        <button
+          className="md:hidden text-3xl text-purple-500"
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
+          {isOpen ? <FiX /> : <FiMenu />}
+        </button>
       </div>
 
-      {/* Mobile Menu Items */}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-4/5 bg-[#050414] bg-opacity-50 backdrop-filter backdrop-blur-lg z-50 rounded-lg shadow-lg md:hidden">
-          <ul className="flex flex-col items-center space-y-4 py-4 text-gray-300">
-            {menuItems.map((item) => (
-              <li
-                key={item.id}
-                className={`cursor-pointer hover:text-white ${
-                  activeSection === item.id ? "text-[#8245ec]" : ""
-                }`}
-              >
-                <button onClick={() => handleMenuItemClick(item.id)}>
-                  {item.label}
-                </button>
-              </li>
-            ))}
-            <div className="flex space-x-4">
-              <a
-                href="https://github.com/alokrj01"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
-              >
-                <FaGithub size={24} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/alok-ranjan972"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
-              >
-                <FaLinkedin size={24} />
-              </a>
-            </div>
-          </ul>
+        <div className="md:hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-40 flex items-center justify-center">
+          <div className="bg-[#050414] rounded-xl p-6 w-[80%] max-w-sm shadow-lg">
+            <ul className="flex flex-col items-center gap-6 text-gray-300">
+              {menuItems.map((item) => (
+                <li key={item.id}>
+                  <button
+                    onClick={() => handleMenuItemClick(item.id)}
+                    className={`text-lg hover:text-white transition ${
+                      activeSection === item.id
+                        ? "text-purple-400"
+                        : ""
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              ))}
+
+              {/* Socials */}
+              <div className="flex gap-6 mt-4">
+                <a
+                  href="https://github.com/alokrj01"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-white"
+                >
+                  <FaGithub size={24} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/alok-ranjan972"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-white"
+                >
+                  <FaLinkedin size={24} />
+                </a>
+              </div>
+            </ul>
+          </div>
         </div>
       )}
     </nav>
