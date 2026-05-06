@@ -31,7 +31,7 @@ const Education = () => {
             }`}
           >
             {/* Timeline Circle */}
-            <div className="absolute left-0 sm:left-1/2 -translate-x-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full border-4 border-purple-500 bg-gray-800 flex items-center justify-center z-10">
+            <div className="absolute left-0 sm:left-1/2 sm:-translate-x-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full border-4 border-purple-500 bg-gray-800 flex items-center justify-center z-10">
               <img
                 src={edu.img}
                 alt={`${edu.school} logo`}
@@ -47,9 +47,7 @@ const Education = () => {
               shadow-lg 
               transition-transform duration-300 hover:scale-105"
             >
-              <h3 className="text-xl font-semibold text-white">
-                {edu.degree}
-              </h3>
+              <h3 className="text-xl font-semibold text-white">{edu.degree}</h3>
               <h4 className="text-sm text-gray-300 mt-1">{edu.school}</h4>
               <p className="text-xs text-gray-500 mt-1">{edu.date}</p>
 

@@ -13,7 +13,7 @@ const Navbar = () => {
     { id: "experience", label: "Experience" },
     { id: "projects", label: "Projects" },
     { id: "education", label: "Education" },
-    { id: "certifications", label: "certifications"},
+    { id: "certifications", label: "Certifications" },
   ];
 
   // Scroll detection (navbar bg + active section)
@@ -59,7 +59,6 @@ const Navbar = () => {
       }`}
     >
       <div className="text-white py-4 flex justify-between items-center">
-        
         {/* Logo */}
         <div className="text-lg font-semibold cursor-pointer select-none">
           <span className="text-purple-500">&lt;</span>
@@ -112,6 +111,8 @@ const Navbar = () => {
         <button
           className="md:hidden text-3xl text-purple-500"
           onClick={() => setIsOpen((prev) => !prev)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
         >
           {isOpen ? <FiX /> : <FiMenu />}
         </button>
@@ -127,9 +128,7 @@ const Navbar = () => {
                   <button
                     onClick={() => handleMenuItemClick(item.id)}
                     className={`text-lg hover:text-white transition ${
-                      activeSection === item.id
-                        ? "text-purple-400"
-                        : ""
+                      activeSection === item.id ? "text-purple-400" : ""
                     }`}
                   >
                     {item.label}

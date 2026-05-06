@@ -16,7 +16,7 @@ const Footer = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll 
+  // Smooth scroll
   const handleScroll = (id) => {
     const section = document.getElementById(id);
     if (section) {
@@ -25,39 +25,37 @@ const Footer = () => {
     }
   };
 
-  // Smooth scroll to top 
+  // Smooth scroll to top
   const scrollToTop = () => {
     const start = window.scrollY;
-  const duration = 800; // animation duration (ms)
-  let startTime = null;
+    const duration = 800; // animation duration (ms)
+    let startTime = null;
 
-  const easeInOutCubic = (t) =>
-    t < 0.5
-      ? 4 * t * t * t
-      : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const easeInOutCubic = (t) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-  const animateScroll = (currentTime) => {
-    if (!startTime) startTime = currentTime;
+    const animateScroll = (currentTime) => {
+      if (!startTime) startTime = currentTime;
 
-    const timeElapsed = currentTime - startTime;
-    const progress = Math.min(timeElapsed / duration, 1);
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
 
-    const ease = easeInOutCubic(progress);
-    window.scrollTo(0, start * (1 - ease));
+      const ease = easeInOutCubic(progress);
+      window.scrollTo(0, start * (1 - ease));
 
-    if (progress < 1) {
-      requestAnimationFrame(animateScroll);
-    }
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
   };
-
-  requestAnimationFrame(animateScroll);
-};
 
   const navItems = [
     { name: "About", id: "about" },
     { name: "Skills", id: "skills" },
     { name: "Experience", id: "experience" },
-    { name: "Projects", id: "projects" }, 
+    { name: "Projects", id: "projects" },
     { name: "Education", id: "education" },
     { name: "Certifications", id: "certifications" },
   ];
@@ -65,7 +63,10 @@ const Footer = () => {
   const socials = [
     { icon: <FaFacebook />, link: "https://www.facebook.com/Alokrj01" },
     { icon: <FaTwitter />, link: "https://x.com/alokrj_" },
-    { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/alok-ranjan972" },
+    {
+      icon: <FaLinkedin />,
+      link: "https://www.linkedin.com/in/alok-ranjan972",
+    },
     { icon: <FaInstagram />, link: "https://www.instagram.com/alokrj_" },
     { icon: <SiLeetcode />, link: "https://leetcode.com/" },
   ];
@@ -78,11 +79,8 @@ const Footer = () => {
       >
         {/* Content */}
         <div className="text-center">
-
           {/* Logo */}
-          <h2 className="text-2xl font-bold text-purple-500">
-            Alok Ranjan
-          </h2>
+          <h2 className="text-2xl font-bold text-purple-500">Alok Ranjan</h2>
 
           {/* Navigation */}
           <nav className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-6 text-sm sm:text-base">

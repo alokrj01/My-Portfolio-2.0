@@ -58,7 +58,7 @@ const About = () => {
           <p className="text-gray-400 mt-6 text-sm sm:text-base leading-relaxed max-w-xl mx-auto md:mx-0">
             I am a <span className="text-white font-medium">Fullstack Developer</span> 
             specializing in the <span className="text-purple-400">MERN stack</span>, 
-            focused on building <span className="text-white">scalable, high-performance</span> 
+            focused on building <span className="text-white">scalable, high-performance</span>{" "}
             web applications. I enjoy solving real-world problems with clean architecture, 
             responsive UI, and efficient backend systems.
           </p>

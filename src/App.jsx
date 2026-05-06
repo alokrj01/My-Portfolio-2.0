@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import BlurBlob from "./BlurBlob";
+import { ErrorBoundary } from 'react-error-boundary';
+
 
 // Lazy load heavy sections (performance boost)
 const About = lazy(() => import("./components/About/About"));
@@ -8,7 +10,7 @@ const Skills = lazy(() => import("./components/Skills/Skills"));
 const Experience = lazy(() => import("./components/Experience/Experience"));
 const Projects = lazy(() => import("./components/Projects/Projects"));
 const Education = lazy(() => import("./components/Education/Education"));
-const Certifications = lazy(() => import("./components/Certifications/certifications"));
+const Certifications = lazy(() => import("./components/Certifications/Certifications"));
 const Contact = lazy(() => import("./components/Contact/Contact"));
 const Footer = lazy(() => import("./components/Footer/Footer"));
 
@@ -43,6 +45,7 @@ const App = () => {
         <Navbar />
 
         {/* Suspense for lazy loading */}
+        <ErrorBoundary fallback={<div className="text-center py-20">Something went wrong. Please refresh.</div>}>
         <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
           <About />
           <Skills />
@@ -53,6 +56,7 @@ const App = () => {
           <Contact />
           <Footer />
         </Suspense>
+        </ErrorBoundary>
 
       </div>
     </div>

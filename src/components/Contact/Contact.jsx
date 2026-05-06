@@ -13,16 +13,30 @@ const Contact = () => {
 
     setLoading(true);
 
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      toast.error("Email service is not configured properly.", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "dark",
+      });
+      setLoading(false);
+      return;
+    }
+
     emailjs
       .sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        serviceId,
+        templateId,
         form.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        publicKey
       )
       .then(() => {
         form.current.reset();
-        toast.success("Message sent successfully! ✅ Check your inbox.", {
+        toast.success("Message sent successfully ✅!  Check your inbox.", {
           position: "top-right",
           autoClose: 3000,
           theme: "dark",

@@ -16,6 +16,9 @@ const Projects = () => {
   // Prevent background scroll when modal open
   useEffect(() => {
     document.body.style.overflow = selectedProject ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [selectedProject]);
 
   return (
@@ -39,6 +42,14 @@ const Projects = () => {
           <div
             key={project.id}
             onClick={() => setSelectedProject(project)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setSelectedProject(project);
+              }
+            }}
+            role="button"
+            tabIndex={0}
             className="group border border-white/10 bg-white/5 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden cursor-pointer transition duration-300 hover:-translate-y-2 hover:shadow-purple-500/40"
           >
             {/* Image */}
@@ -90,7 +101,9 @@ const Projects = () => {
             {/* Close Button */}
             <button
               onClick={() => setSelectedProject(null)}
-              className="absolute top-4 right-4 text-white text-2xl hover:text-purple-500"
+              aria-label="Close modal"
+              className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-pink-500
+    text-white text-sm shadow-md shadow-purple-500/40 hover:scale-110 hover:shadow-pink-500/50 transition-all duration-300"
             >
               ✕
             </button>
@@ -128,23 +141,26 @@ const Projects = () => {
 
               {/* Actions */}
               <div className="flex gap-4">
-                <a
-                  href={selectedProject.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 bg-gray-800 hover:bg-purple-700 text-gray-300 py-2 rounded-lg text-sm font-semibold text-center transition"
-                >
-                  View Code
-                </a>
-
-                <a
-                  href={selectedProject.webapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 bg-purple-600 hover:bg-purple-800 text-white py-2 rounded-lg text-sm font-semibold text-center transition"
-                >
-                  View Live
-                </a>
+                {selectedProject.github && (
+                  <a
+                    href={selectedProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-gray-800 hover:bg-purple-700 text-gray-300 py-2 rounded-lg text-sm font-semibold text-center transition"
+                  >
+                    View Code
+                  </a>
+                )}
+                {selectedProject.webapp && (
+                  <a
+                    href={selectedProject.webapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-purple-600 hover:bg-purple-800 text-white py-2 rounded-lg text-sm font-semibold text-center transition"
+                  >
+                    View Live
+                  </a>
+                )}
               </div>
             </div>
           </div>
