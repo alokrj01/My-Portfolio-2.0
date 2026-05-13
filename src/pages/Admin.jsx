@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 
 export default function Admin() {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const fileInputRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -38,6 +39,9 @@ export default function Admin() {
 
     alert("Resume updated successfully!");
     setFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
 
   } catch (err) {
     alert(err.message);
@@ -64,6 +68,7 @@ export default function Admin() {
         <h1 className="text-2xl font-bold mb-4">Resume Admin Panel</h1>
 
         <input
+        ref={fileInputRef}
           type="file"
           accept="application/pdf"
           onChange={(e) => setFile(e.target.files[0])}
