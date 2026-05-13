@@ -6,6 +6,9 @@ import profileImage from "../../assets/img.png";
 const About = () => {
   const [isMobile, setIsMobile] = useState(false);
 
+   const resumeUrl =
+    `https://pjnqjxlhqkblvgnixonc.supabase.co/storage/v1/object/public/resume/resume.pdf?v=${new Date().getTime()}`
+
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
@@ -65,7 +68,7 @@ const About = () => {
 
           {/* CTA */}
           <a
-            href="https://pjnqjxlhqkblvgnixonc.supabase.co/storage/v1/object/public/resume/ALOK%20RANJAN%20RESUME.pdf"
+            href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block mt-8 px-8 py-3 rounded-full text-white font-semibold 
