@@ -6,8 +6,10 @@ import profileImage from "../../assets/img.png";
 const About = () => {
   const [isMobile, setIsMobile] = useState(false);
 
-   const resumeUrl =
-    `https://pjnqjxlhqkblvgnixonc.supabase.co/storage/v1/object/public/resume/resume.pdf?v=${new Date().getTime()}`
+   const resumeUrl = React.useMemo(
+    () => `https://pjnqjxlhqkblvgnixonc.supabase.co/storage/v1/object/public/resume/resume.pdf?v=${Date.now()}`,
+    []
+   );
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);

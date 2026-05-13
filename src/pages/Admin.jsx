@@ -3,46 +3,48 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 
 export default function Admin() {
-  const [file, setFile] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const uploadResume = async () => {
     if (!file) {
-      alert ('Select a PDF file')
-      return
+      alert("Select a PDF file");
+      return;
     }
 
-    if (file.type !== 'application/pdf') {
-    alert('Only PDF files are allowed')
-    return
+    if (file.type !== "application/pdf") {
+      alert("Only PDF files are allowed");
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
 
-    const { data, error } = await supabase.storage
-    .from('resume')
-    .upload('resume.pdf', file, {
-      cacheControl: "0",
-      upsert: true,
-    })
+    const { error } = await supabase.storage
+      .from("resume")
+      .upload("resume.pdf", file, {
+        cacheControl: "0",
+        upsert: true,
+      });
 
-    setLoading(false)
-
-    console.log(data)
-    console.log(error)
+    setLoading(false);
 
     if (error) {
-      alert(error.message)
-      return
+      alert(error.message);
+      return;
     }
 
-    alert('Resume updated successfully!')
+    alert("Resume updated successfully!");
   };
 
-  const handleLogout = async() => {
-    await supabase.auth.signOut();
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      alert("Failed to logout: " + error.message);
+      return;
+    }
 
     navigate("/login");
   };
@@ -50,9 +52,7 @@ export default function Admin() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="border p-6 rounded-xl w-[400px]">
-        <h1 className="text-2xl font-bold mb-4">
-          Resume Admin Panel
-        </h1>
+        <h1 className="text-2xl font-bold mb-4">Resume Admin Panel</h1>
 
         <input
           type="file"
@@ -62,15 +62,19 @@ export default function Admin() {
 
         <button
           onClick={uploadResume}
+          disabled={loading}
           className="w-full mt-4 px-4 py-2 bg-black text-white rounded"
         >
-          {loading ? 'Uploading...' : 'Upload Resume'}
-        </button>
+          {loading ? "Uploading..." : "upload Resume"}
+          </button>
 
-        <button onClick={handleLogout}>
-        Logout
-        </button>
+          <button
+            onClick={handleLogout}
+            className="w-full mt-4 px-4 py-2 bg-gray-200 text-black rounded hover:bg-gray-300"
+          >
+            Logout
+          </button>
       </div>
     </div>
-  )
+  );
 }
