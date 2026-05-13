@@ -65,7 +65,7 @@ const About = () => {
 
           {/* CTA */}
           <a
-            href="https://drive.google.com/file/d/1OGhI4sxvfh_6G0s_EewHPZctdM2PnPlN/view?usp=drive_link"
+            href="https://pjnqjxlhqkblvgnixonc.supabase.co/storage/v1/object/public/resume/ALOK%20RANJAN%20RESUME.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block mt-8 px-8 py-3 rounded-full text-white font-semibold 
