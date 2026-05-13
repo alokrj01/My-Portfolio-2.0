@@ -20,7 +20,8 @@ export default function Admin() {
     }
 
     setLoading(true);
-
+     
+    try {
     const { error } = await supabase.storage
       .from("resume")
       .upload("resume.pdf", file, {
@@ -36,6 +37,14 @@ export default function Admin() {
     }
 
     alert("Resume updated successfully!");
+    setFile(null);
+
+  } catch (err) {
+    alert(err.message);
+  }
+    finally {
+    setLoading(false);
+    }
   };
 
   const handleLogout = async () => {
@@ -65,7 +74,7 @@ export default function Admin() {
           disabled={loading}
           className="w-full mt-4 px-4 py-2 bg-black text-white rounded"
         >
-          {loading ? "Uploading..." : "upload Resume"}
+          {loading ? "Uploading..." : "Upload Resume"}
           </button>
 
           <button

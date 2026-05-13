@@ -13,6 +13,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -21,7 +22,7 @@ export default function Login() {
       });
 
       if (error) {
-        alert(error.message);
+        setError(error.message);
         return;
       }
 
