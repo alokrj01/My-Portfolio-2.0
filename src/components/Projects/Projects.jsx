@@ -1,8 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { projects } from "../../constants";
+//import { projects } from "../../constants";
+import { supabase } from "../../lib/supabase";
 
 const Projects = () => {
+  const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+
+  const fetchProjects = async () => {
+    const { data, error } = await supabase
+      .from("projects")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    setProjects(data);
+  };
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      await fetchProjects();
+    };
+
+    loadProjects();
+  }, []);
 
   // Close modal on ESC key
   useEffect(() => {
@@ -38,6 +63,7 @@ const Projects = () => {
 
       {/* Grid */}
       <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
         {projects?.map((project) => (
           <div
             key={project.id}
@@ -74,7 +100,7 @@ const Projects = () => {
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mt-4">
-                {project.tags?.map((tag, i) => (
+                {project.techstack?.split(",").map((tag, i) => (
                   <span
                     key={`${tag}-${i}`}
                     className="bg-purple-600/20 text-purple-400 text-xs px-2 py-1 rounded-md border border-purple-500/20"
@@ -129,7 +155,7 @@ const Projects = () => {
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-6">
-                {selectedProject.tags?.map((tag, i) => (
+                {selectedProject.techstack?.split(",").map((tag, i) => (
                   <span
                     key={`${tag}-${i}`}
                     className="bg-purple-600/20 text-purple-400 text-xs px-2 py-1 rounded-md border border-purple-500/20"
@@ -151,9 +177,9 @@ const Projects = () => {
                     View Code
                   </a>
                 )}
-                {selectedProject.webapp && (
+                {selectedProject.live && (
                   <a
-                    href={selectedProject.webapp}
+                    href={selectedProject.live}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 bg-purple-600 hover:bg-purple-800 text-white py-2 rounded-lg text-sm font-semibold text-center transition"

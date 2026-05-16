@@ -55,6 +55,7 @@ const About = () => {
               speed={50}
               repeat={Infinity}
               wrapper="span"
+              cursor={false}
               className="text-purple-500"
             />
           </h3>

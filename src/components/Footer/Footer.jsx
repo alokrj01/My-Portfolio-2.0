@@ -126,6 +126,7 @@ const Footer = () => {
           onClick={scrollToTop}
           aria-label="Scroll to top"
           className="
+            group
             fixed bottom-6 right-6 z-50
             w-12 h-12 md:w-14 md:h-14
             rounded-full
@@ -136,7 +137,7 @@ const Footer = () => {
             transition-all duration-300
           "
         >
-          <RiArrowUpLine className="text-2xl md:text-3xl animate-bounce" />
+          <RiArrowUpLine className="text-2xl md:text-3xl transition-transform duration-300 group-hover:-translate-y-1" />
         </button>
       )}
     </>

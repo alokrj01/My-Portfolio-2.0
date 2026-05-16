@@ -7,7 +7,7 @@ const BlurBlob = ({
   color = "bg-purple-500",
   opacity = "opacity-20",
   blur = "blur-3xl",
-  animation = "animate-blob",
+  animation = "",
   zIndex = "z-0",
 }) => {
   return (

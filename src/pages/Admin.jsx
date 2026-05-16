@@ -1,94 +1,13 @@
-import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "../lib/supabase";
+import ResumeManager from "../components/admin/ResumeManager";
+import ProjectManager from "../components/admin/ProjectManager";
+import LogoutButton from "../components/admin/LogoutButton";
 
 export default function Admin() {
-  const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const fileInputRef = useRef(null);
-
-  const navigate = useNavigate();
-
-  const uploadResume = async () => {
-    if (!file) {
-      alert("Select a PDF file");
-      return;
-    }
-
-    if (file.type !== "application/pdf") {
-      alert("Only PDF files are allowed");
-      return;
-    }
-
-    setLoading(true);
-     
-    try {
-    const { error } = await supabase.storage
-      .from("resume")
-      .upload("resume.pdf", file, {
-        cacheControl: "0",
-        upsert: true,
-      });
-
-    setLoading(false);
-
-    if (error) {
-      alert(error.message);
-      return;
-    }
-
-    alert("Resume updated successfully!");
-    setFile(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-
-  } catch (err) {
-    alert(err.message);
-  }
-    finally {
-    setLoading(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      alert("Failed to logout: " + error.message);
-      return;
-    }
-
-    navigate("/login");
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="border p-6 rounded-xl w-[400px]">
-        <h1 className="text-2xl font-bold mb-4">Resume Admin Panel</h1>
-
-        <input
-        ref={fileInputRef}
-          type="file"
-          accept="application/pdf"
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-
-        <button
-          onClick={uploadResume}
-          disabled={loading}
-          className="w-full mt-4 px-4 py-2 bg-black text-white rounded"
-        >
-          {loading ? "Uploading..." : "Upload Resume"}
-          </button>
-
-          <button
-            onClick={handleLogout}
-            className="w-full mt-4 px-4 py-2 bg-gray-200 text-black rounded hover:bg-gray-300"
-          >
-            Logout
-          </button>
-      </div>
+    <div className="min-h-screen flex flex-col items-center gap-8 p-8">
+      <LogoutButton />
+      <ResumeManager />
+      <ProjectManager />
     </div>
   );
 }
