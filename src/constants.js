@@ -126,7 +126,7 @@ export const experiences = [
     desc: "Leveraged Python libraries (Pandas, NumPy, Matplotlib, Scikit-learn, XGBoost) for comprehensive data analysis and predictive modeling, achieving 85% accuracy on classification tasks, boosting business decisions by 25%, and reducing data processing time by 30%.Created interactive dashboards with Power BI and Tableau, enabling real-time KPI monitoring and improving stakeholder decision making efficiency.",
     skills: [
       "Python",
-      "Stremalit",
+      "Streamlit",
       "Numpy",
       "Pandas",
       "Matplotlib",

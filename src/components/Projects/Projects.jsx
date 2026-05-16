@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import { projects } from "../../constants";
 import { supabase } from "../../lib/supabase";
 
 const Projects = () => {
@@ -100,7 +99,10 @@ const Projects = () => {
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mt-4">
-                {project.techstack?.split(",").map((tag, i) => (
+                {project.techstack
+                ?.split(",")
+                .map((tag) => tag.trim())
+                .filter(Boolean).map((tag, i) => (
                   <span
                     key={`${tag}-${i}`}
                     className="bg-purple-600/20 text-purple-400 text-xs px-2 py-1 rounded-md border border-purple-500/20"

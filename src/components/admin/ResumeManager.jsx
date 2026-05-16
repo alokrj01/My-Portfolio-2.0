@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { supabase } from "../../lib/supabase";
-import LogoutButton from "./LogoutButton";
 
 export default function ResumeManager() {
   const [file, setFile] = useState(null);
@@ -29,8 +28,6 @@ export default function ResumeManager() {
         upsert: true,
       });
 
-    setLoading(false);
-
     if (error) {
       alert(error.message);
       return;
@@ -45,14 +42,13 @@ export default function ResumeManager() {
   } catch (err) {
     alert(err.message);
   }
-    finally {
+  finally {
     setLoading(false);
-    }
+  }
   };
 
   
   return (
-    //<div className="min-h-screen flex items-center justify-center">
       <div className="border p-6 rounded-xl w-[400px]">
         <h1 className="text-2xl font-bold mb-4">Resume Admin Panel</h1>
 
@@ -72,6 +68,5 @@ export default function ResumeManager() {
           </button>
 
       </div>
-    //</div>
   );
 }
